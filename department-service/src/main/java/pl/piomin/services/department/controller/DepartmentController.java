@@ -26,6 +26,7 @@ public class DepartmentController {
 	
 	@Autowired
 	DepartmentRepository repository;
+
 	@Autowired
 	EmployeeClient employeeClient;
 	

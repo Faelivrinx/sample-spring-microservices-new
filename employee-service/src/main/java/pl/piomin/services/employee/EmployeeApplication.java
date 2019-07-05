@@ -1,12 +1,14 @@
 package pl.piomin.services.employee;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 
+import pl.piomin.services.employee.model.Employee;
 import pl.piomin.services.employee.repository.EmployeeRepository;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
@@ -36,6 +38,15 @@ public class EmployeeApplication {
 					.paths(PathSelectors.any())
 				.build()
 				.apiInfo(new ApiInfoBuilder().version("1.0").title("Employee API").description("Documentation Employee API v1.0").build());
+	}
+
+	@Bean
+	CommandLineRunner runner(){
+		return args -> {
+			Employee employee = new Employee(1L, 1L, "Employee", 18, "Head");
+			employee.setId("1");
+			repository.save(employee);
+		};
 	}
 	
 }
